@@ -1,10 +1,43 @@
 <body>
-  <h1>it works!</h1>
+  <canvas id="c"></canvas>
   <style>
-    body { background: black; color: white; font-family: sans-serif; }
+    body { margin: 0; overflow: hidden; background: black; }
   </style>
   <script>
-    const title = document.querySelector("h1");
-    title.onclick = () => (title.textContent = "you clicked it");
+    const c = document.getElementById("c");
+    const W = 30;
+    const H = 30;
+
+    let game = Array.from({ length: W }, () =>
+      Array.from({ length: H }, () => (Math.random() < 0.3 ? 1 : 0))
+    );
+
+    function count(x, y) {
+      let n = 0;
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          if (dx === 0 && dy === 0) continue;
+          n += game[(x + dx + W) % W][(y + dy + H) % H];
+        }
+      }
+      return n;
+    }
+
+    function run() {
+      var next = Array.from({length: W}, () => Array(H).fill(0));
+      for (let i = 0; i < W; i++) {
+        for (let j = 0; j < H; j++) {
+          let n = count(i, j);
+          if (game[i][j]) {
+            next[i][j] = n == 2 || n == 3? 1: 0;
+          } else {
+            next[i][j] = n == 3? 1:0;
+          }
+        }
+      }
+      game = next;
+    }
+
+    setInterval(run, 1000);
   </script>
 </body>
