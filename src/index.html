@@ -4,13 +4,22 @@
     <span>Interval:</span>
     <span id="interval"></span>
     <div>
-      <button style="padding: 16px" onclick="interval += 100">+</button>
-      <button style="padding: 16px;" onclick="interval -= interval == 0? 0 : 100">-</button>
+      <button style="padding: 16px" onclick="interval += 100" id="plus">+</button>
+      <button style="padding: 16px;" onclick="interval -= interval == 0? 0 : 100" id="minus">-</button>
     </div>
     <br/>
-    <button style="padding: 24px" onclick="clearTimeout(timeout); setup(); render();">
+    <button style="padding: 24px" onclick="clearTimeout(timeout); setup(); render();" id="reset">
       Reset
     </button>
+    <br/><br/>
+    <div>
+      <span>Keyboard shortcuts</span>
+      <ul>
+        <li>Arrow Up: increase interval</li>
+        <li>Arrow Down: decrease interval</li>
+        <li>R: reset</li>
+      </ul>
+    </div>
   </div>
   <style>
     body { margin: 0; background: black; color: white; display: flex; align-items: center;}
@@ -78,11 +87,18 @@
       timeout = setTimeout(() => {run(); render()}, interval);
     }
 
+    function press(e) {
+      if (e.code == "ArrowUp") document.getElementById("plus").click();
+      else if (e.code == "ArrowDown") document.getElementById("minus").click();
+      else if (e.code == "KeyR") document.getElementById("reset").click();
+    }
+
     init();
     setup();
     timeout = setTimeout(() => {run(); render()}, interval);
     setInterval(() => document.getElementById("interval").innerText = interval, 10);
 
     window.addEventListener("resize", init);
+    window.addEventListener("keydown", press);
   </script>
 </body>
