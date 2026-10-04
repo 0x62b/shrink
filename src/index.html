@@ -53,7 +53,6 @@
       }
     }
 
-    setInterval(run, 1000);
-    setInterval(render, 1000);
+    setInterval(() => {run(); render()}, 1000);
   </script>
 </body>
