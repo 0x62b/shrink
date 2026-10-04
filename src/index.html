@@ -1,10 +1,19 @@
 <body>
+  <div></div>
   <canvas id="c"></canvas>
+  <div style="display: flex; flex-direction: column;">
+    <span>Interval:</span>
+    <span id="interval"></span>
+    <button onclick="interval += 100">+</button>
+    <button onclick="interval -= 100">-</button>
+  </div>
   <style>
-    body { margin: 0; background: black; display: flex; align-items: center; justify-content: center;}
+    body { margin: 0; background: black; color: white; display: flex; align-items: center; justify-content: center;}
     canvas { display: block }
   </style>
   <script>
+    let interval = 1000;
+
     const W = 50;
     const H = 50;
     const SIZE = Math.floor(Math.min(window.innerWidth, window.innerHeight) / 50);
@@ -51,8 +60,10 @@
           ctx.fillRect(i * SIZE, j * SIZE, SIZE - 1, SIZE - 1);
         }
       }
+      setTimeout(() => {run(); render()}, interval);
     }
 
-    setInterval(() => {run(); render()}, 1000);
+    setTimeout(() => {run(); render()}, interval);
+    setInterval(() => document.getElementById("interval").innerText = interval, 10);
   </script>
 </body>
