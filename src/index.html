@@ -1,12 +1,17 @@
 <body>
-  <div id="c"></div>
+  <canvas id="c"></canvas>
   <style>
     body { margin: 0; overflow: hidden }
   </style>
   <script>
-    let c = document.getElementById("c");
     const W = 30;
     const H = 30;
+    const SIZE = 10;
+
+    const c = document.getElementById("c");
+    const ctx = c.getContext('2d');
+    c.width = W * SIZE;
+    c.height = H * SIZE;
 
     let game = Array.from({ length: W }, () =>
       Array.from({ length: H }, () => (Math.random() < 0.3 ? 1 : 0))
@@ -42,11 +47,9 @@
       c.innerHTML = '';
       for (let i = 0; i < W; i++) {
         for (let j = 0; j < H; j++) {
-          let elem = document.createElement('span');
-          elem.textContent = game[i][j];
-          c.appendChild(elem);
+          ctx.fillStyle = game[i][j] ? "#0f0" : "#222";
+          ctx.fillRect(i * SIZE, j * SIZE, SIZE - 1, SIZE - 1);
         }
-        c.appendChild(document.createElement('br'));
       }
     }
 
