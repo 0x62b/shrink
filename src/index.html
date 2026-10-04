@@ -7,7 +7,7 @@
   <script>
     const W = 50;
     const H = 50;
-    const SIZE = Math.min(window.innerWidth, window.innerHeight) / 50;
+    const SIZE = Math.floor(Math.min(window.innerWidth, window.innerHeight) / 50);
 
     const c = document.getElementById("c");
     const ctx = c.getContext('2d');
