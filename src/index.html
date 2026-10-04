@@ -1,10 +1,10 @@
 <body>
-  <canvas id="c"></canvas>
+  <div id="c"></div>
   <style>
-    body { margin: 0; overflow: hidden; background: black; }
+    body { margin: 0; overflow: hidden }
   </style>
   <script>
-    const c = document.getElementById("c");
+    let c = document.getElementById("c");
     const W = 30;
     const H = 30;
 
@@ -38,6 +38,19 @@
       game = next;
     }
 
+    function render() {
+      c.innerHTML = '';
+      for (let i = 0; i < W; i++) {
+        for (let j = 0; j < H; j++) {
+          let elem = document.createElement('span');
+          elem.textContent = game[i][j];
+          c.appendChild(elem);
+        }
+        c.appendChild(document.createElement('br'));
+      }
+    }
+
     setInterval(run, 1000);
+    setInterval(render, 1000);
   </script>
 </body>
