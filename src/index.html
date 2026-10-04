@@ -7,6 +7,10 @@
       <button style="padding: 16px" onclick="interval += 100">+</button>
       <button style="padding: 16px;" onclick="interval -= 100">-</button>
     </div>
+    <br/>
+    <button style="padding: 24px" onclick="clearTimeout(timeout); setup(); render();">
+      Reset
+    </button>
   </div>
   <style>
     body { margin: 0; background: black; color: white; display: flex; align-items: center;}
@@ -24,9 +28,14 @@
     c.width = W * SIZE;
     c.height = H * SIZE;
 
-    let game = Array.from({ length: W }, () =>
-      Array.from({ length: H }, () => (Math.random() < 0.3 ? 1 : 0))
-    );
+    let game;
+    let timeout;
+
+    function setup() {
+      game = Array.from({ length: W }, () =>
+        Array.from({ length: H }, () => (Math.random() < 0.3 ? 1 : 0))
+      );
+    }
 
     function count(x, y) {
       let n = 0;
@@ -61,9 +70,10 @@
           ctx.fillRect(i * SIZE, j * SIZE, SIZE - 1, SIZE - 1);
         }
       }
-      setTimeout(() => {run(); render()}, interval);
+      timeout = setTimeout(() => {run(); render()}, interval);
     }
 
+    setup();
     setTimeout(() => {run(); render()}, interval);
     setInterval(() => document.getElementById("interval").innerText = interval, 10);
   </script>
