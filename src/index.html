@@ -5,7 +5,7 @@
     <span id="interval"></span>
     <div>
       <button style="padding: 16px" onclick="interval += 100">+</button>
-      <button style="padding: 16px;" onclick="interval -= 100">-</button>
+      <button style="padding: 16px;" onclick="interval -= interval == 0? 0 : 100">-</button>
     </div>
     <br/>
     <button style="padding: 24px" onclick="clearTimeout(timeout); setup(); render();">
