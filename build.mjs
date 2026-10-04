@@ -18,7 +18,7 @@ let html = "";
 for (const part of src.split(/(<script>[\s\S]*?<\/script>|<style>[\s\S]*?<\/style>)/)) {
   if (part.startsWith("<script>")) {
     const js = part.slice(8, -9).replace(/glsl`([^`]*)`/g, (_, s) => JSON.stringify(glsl(s)));
-    const { code } = await minify(js, { compress: { passes: 3 } });
+    const { code } = await minify(js, { compress: { passes: 3 } }); // `toplevel: true` was removed because it broke my buttons (on the advice of claude)
     html += "<script>" + code + "</script>";
   } else if (part.startsWith("<style>")) {
     html += part
