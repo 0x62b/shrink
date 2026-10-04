@@ -1,14 +1,15 @@
 <body>
-  <div></div>
   <canvas id="c"></canvas>
-  <div style="display: flex; flex-direction: column;">
+  <div style="margin: 16px;">
     <span>Interval:</span>
     <span id="interval"></span>
-    <button onclick="interval += 100">+</button>
-    <button onclick="interval -= 100">-</button>
+    <div>
+      <button style="padding: 16px" onclick="interval += 100">+</button>
+      <button style="padding: 16px;" onclick="interval -= 100">-</button>
+    </div>
   </div>
   <style>
-    body { margin: 0; background: black; color: white; display: flex; align-items: center; justify-content: center;}
+    body { margin: 0; background: black; color: white; display: flex; align-items: center;}
     canvas { display: block }
   </style>
   <script>
